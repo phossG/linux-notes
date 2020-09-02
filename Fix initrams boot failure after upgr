@@ -1,17 +1,17 @@
-# had some trouble with Debian and Ubuntu VPSs. apt upgrades don't play well with MSP bootloaders.
-#
-# this fix is for when apt-get upgrade spits this out:
-#
-#      I: The initramfs will attempt to resume from /dev/sda2
-#      I:     UUID=948396b3-f329-4b5a-9771-1464ff25eca9
-#      I: Set the RESUME variable to override this.
-#
+had some trouble with Debian and Ubuntu VPSs. apt upgrades don't play well with MSP bootloaders.
+
+this fix is for when apt-get upgrade spits this out:
+
+      I: The initramfs will attempt to resume from /dev/sda2
+      I:     UUID=948396b3-f329-4b5a-9771-1464ff25eca9
+      I: Set the RESUME variable to override this.
+
 $ blkid | awk -F\" '/swap/ {print $2}'
 $ printf "RESUME=UUID=$(blkid | awk -F\" '/swap/ {print $2}')\n" | sudo tee /etc/initramfs-tools/conf.d/resume
 $ sudo update-initramfs -u -k all
-#
+
 # or
-#
+
 # boot from LiveCD or repair
 $ sudo fdisk -l   #to find boot disk marked with*
 $ sudo fsck /dev/vda1    #disk with boot record
