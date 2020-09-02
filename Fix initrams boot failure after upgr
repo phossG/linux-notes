@@ -1,1 +1,13 @@
-# linux-scripts-setups
+# had 
+
+$ blkid | awk -F\" '/swap/ {print $2}'
+$ printf "RESUME=UUID=$(blkid | awk -F\" '/swap/ {print $2}')\n" | sudo tee /etc/initramfs-tools/conf.d/resume
+$ sudo update-initramfs -u -k all
+
+# or
+      
+# boot from LiveCD or repair
+$ sudo fdisk -l   #to find boot disk marked with*
+$ sudo fsck /dev/vda1    #disk with boot record
+
+
