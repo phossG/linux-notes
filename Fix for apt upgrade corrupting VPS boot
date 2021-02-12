@@ -9,7 +9,7 @@ this fix is for when apt-get upgrade spits this out:
  
 
 $ sudo blkid | awk -F\" '/swap/ {print $2}'
-$ sudo printf "RESUME=UUID=$(blkid | awk -F\" '/swap/ {print $2}')\n" | sudo tee /etc/initramfs-tools/conf.d/resume
+$ sudo printf "RESUME=UUID=$(blkid | awk -F\" '/swap/ {print $2}')\n" | sudo tee /etc/initramfs-tools/conf.d/resume  #add sudo to blkid if issues
 $ sudo update-initramfs -u -k all
 $ reboot
 
