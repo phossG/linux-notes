@@ -1,0 +1,9 @@
+sudo tripwire --check --email-report
+
+
+
+
+# reload tw config
+sudo twadmin -m P /etc/tripwire/twpol.txt
+
+sudo tripwire --init
